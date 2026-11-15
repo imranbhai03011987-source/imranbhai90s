@@ -493,7 +493,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
               {/* Embedded Facebook Page Plugin iframe */}
               <div className="mt-5 overflow-hidden rounded-xl border border-white/10 bg-black/40 p-1 flex justify-center">
                 <iframe
-                  src={`https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(FB_PAGES.beverlyHills.url)}&tabs=timeline&width=500&height=300&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true`}
+                  src={`https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(FB_PAGES.beverlyHills.embedUrl)}&tabs=timeline&width=500&height=300&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true`}
                   width="100%"
                   height="300"
                   style={{ border: "none", overflow: "hidden" }}
@@ -550,7 +550,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
               {/* Embedded Facebook Page Plugin iframe */}
               <div className="mt-5 overflow-hidden rounded-xl border border-white/10 bg-black/40 p-1 flex justify-center">
                 <iframe
-                  src={`https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(FB_PAGES.fullHouse.url)}&tabs=timeline&width=500&height=300&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true`}
+                  src={`https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(FB_PAGES.fullHouse.embedUrl)}&tabs=timeline&width=500&height=300&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true`}
                   width="100%"
                   height="300"
                   style={{ border: "none", overflow: "hidden" }}
