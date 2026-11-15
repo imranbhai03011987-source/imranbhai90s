@@ -3,11 +3,6 @@ import { coverUrl } from "../lib/stock";
 import { fmtDate } from "../lib/dates";
 import { readMins, type Post } from "../lib/posts";
 
-import { TrackedLink } from "./Tracked";
-import { coverUrl } from "../lib/stock";
-import { fmtDate } from "../lib/dates";
-import { readMins, type Post } from "../lib/posts";
-
 export function Cover({ post, big = false }: { post: Post; big?: boolean }) {
   return (
     <div className={`relative overflow-hidden bg-black/40 ${big ? "min-h-64 md:min-h-full" : "aspect-[16/10]"}`}>

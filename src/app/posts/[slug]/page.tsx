@@ -304,21 +304,21 @@ export default async function PostPage({ params }: Props) {
                     <span>Share on Facebook</span>
                   </a>
                   <a
-                    href={FB_PAGES.beverlyHills.url}
+                    href="https://www.facebook.com/share/19P1xEugxs/?mibextid=wwXIfr"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 rounded border border-[#1877F2] bg-white px-4 py-2.5 font-sans text-xs font-bold text-[#1877F2] hover:bg-slate-50 transition"
                   >
-                    <span>90210 Fan ({FB_PAGES.beverlyHills.followers})</span>
+                    <span>90210 Fan (8.2K)</span>
                     <span>↗</span>
                   </a>
                   <a
-                    href={FB_PAGES.fullHouse.url}
+                    href="https://www.facebook.com/share/18sdgkeXCu/?mibextid=wwXIfr"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 rounded border border-[#1877F2] bg-white px-4 py-2.5 font-sans text-xs font-bold text-[#1877F2] hover:bg-slate-50 transition"
                   >
-                    <span>Full House Fan ({FB_PAGES.fullHouse.followers})</span>
+                    <span>Full House Fan (2.5K)</span>
                     <span>↗</span>
                   </a>
                 </div>
@@ -373,10 +373,10 @@ export default async function PostPage({ params }: Props) {
 
                 {/* Page 1: Beverly Hills 90210 */}
                 <div className="mt-4 rounded-xl border border-white/10 bg-black/40 p-3.5">
-                  <p className="font-sans text-sm font-bold text-[#00D9FF]">{FB_PAGES.beverlyHills.name}</p>
-                  <p className="mt-0.5 text-xs text-[#F5E6C8]/80">{FB_PAGES.beverlyHills.followers} Followers • Active Group</p>
+                  <p className="font-sans text-sm font-bold text-[#00D9FF]">Beverly Hills 90210 Fan</p>
+                  <p className="mt-0.5 text-xs text-[#F5E6C8]/80">8.2K Followers • Active Group</p>
                   <a
-                    href={FB_PAGES.beverlyHills.url}
+                    href="https://www.facebook.com/share/19P1xEugxs/?mibextid=wwXIfr"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-3 inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#1877F2] py-2 text-xs font-bold text-white shadow hover:scale-105 transition"
@@ -388,10 +388,10 @@ export default async function PostPage({ params }: Props) {
 
                 {/* Page 2: Full House */}
                 <div className="mt-3 rounded-xl border border-white/10 bg-black/40 p-3.5">
-                  <p className="font-sans text-sm font-bold text-[#FFD24A]">{FB_PAGES.fullHouse.name}</p>
-                  <p className="mt-0.5 text-xs text-[#F5E6C8]/80">{FB_PAGES.fullHouse.followers} Followers • TGIF Nostalgia</p>
+                  <p className="font-sans text-sm font-bold text-[#FFD24A]">Full House Fan Club</p>
+                  <p className="mt-0.5 text-xs text-[#F5E6C8]/80">2.5K Followers • TGIF Nostalgia</p>
                   <a
-                    href={FB_PAGES.fullHouse.url}
+                    href="https://www.facebook.com/share/18sdgkeXCu/?mibextid=wwXIfr"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-3 inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#1877F2] py-2 text-xs font-bold text-white shadow hover:scale-105 transition"

@@ -9,7 +9,7 @@ import { FB_PAGES } from "../lib/site";
 export const revalidate = 60;
 
 export const metadata = {
-  title: { absolute: "90s TV Memories | 90s Cartoons, TGIF Sitcoms & VHS Nostalgia" },
+  title: { absolute: "90s TV Memories | Best 90s Shows, TGIF, Cartoons & Cast Then and Now [2026]" },
   description: "Relive the golden era of 90s television: Saturday morning cartoons, TGIF sitcoms, VHS rental nostalgia, and untold behind-the-scenes stories.",
   alternates: { canonical: "/" },
 };
@@ -119,24 +119,24 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
             {/* Facebook Fan Pages Direct Header Links */}
             <div className="hidden lg:flex items-center gap-2">
               <a
-                href={FB_PAGES.beverlyHills.url}
+                href="https://www.facebook.com/share/19P1xEugxs/?mibextid=wwXIfr"
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Beverly Hills 90210 Fan (8.2K)"
                 className="flex items-center gap-1 rounded-full border border-[#00D9FF]/40 bg-[#0a0a23] px-2.5 py-1 text-[11px] font-bold text-[#00D9FF] hover:border-[#00D9FF] hover:bg-[#00D9FF]/10 transition"
               >
                 <Facebook className="h-3 w-3" />
-                <span>90210 ({FB_PAGES.beverlyHills.followers})</span>
+                <span>90210 (8.2K)</span>
               </a>
               <a
-                href={FB_PAGES.fullHouse.url}
+                href="https://www.facebook.com/share/18sdgkeXCu/?mibextid=wwXIfr"
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Full House Fan Club (2.5K)"
                 className="flex items-center gap-1 rounded-full border border-[#FFD24A]/40 bg-[#0a0a23] px-2.5 py-1 text-[11px] font-bold text-[#FFD24A] hover:border-[#FFD24A] hover:bg-[#FFD24A]/10 transition"
               >
                 <Facebook className="h-3 w-3" />
-                <span>Full House ({FB_PAGES.fullHouse.followers})</span>
+                <span>Full House (2.5K)</span>
               </a>
             </div>
 
@@ -156,10 +156,10 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
         <div className="flex items-center justify-center gap-3 overflow-x-auto border-t border-white/10 px-4 py-2 font-bold uppercase text-xs tracking-wider md:hidden">
           <Link href="/" className="text-[#00D9FF]">Home</Link>
           <Link href="/blog?cat=90s+TV+Sitcoms" className="text-[#F5E6C8]">Shows</Link>
-          <a href={FB_PAGES.beverlyHills.url} target="_blank" rel="noopener noreferrer" className="text-[#00D9FF] flex items-center gap-1">
+          <a href="https://www.facebook.com/share/19P1xEugxs/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-[#00D9FF] flex items-center gap-1">
             <Facebook className="h-3 w-3" /> 90210
           </a>
-          <a href={FB_PAGES.fullHouse.url} target="_blank" rel="noopener noreferrer" className="text-[#FFD24A] flex items-center gap-1">
+          <a href="https://www.facebook.com/share/18sdgkeXCu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-[#FFD24A] flex items-center gap-1">
             <Facebook className="h-3 w-3" /> Full House
           </a>
           <Link href="/about" className="text-[#F5E6C8]">About</Link>
@@ -507,13 +507,13 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
               </div>
 
               <a
-                href={FB_PAGES.beverlyHills.url}
+                href="https://www.facebook.com/share/19P1xEugxs/?mibextid=wwXIfr"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-4 inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-[#1877F2] to-[#00D9FF] py-3 text-center font-bold uppercase text-xs tracking-wider text-white shadow hover:brightness-110 transition"
               >
                 <Facebook className="h-4 w-4" />
-                <span>Follow {FB_PAGES.beverlyHills.name} on Facebook</span>
+                <span>Follow Beverly Hills 90210 Fan on Facebook</span>
               </a>
             </div>
 
@@ -534,7 +534,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
                   </div>
                 </div>
                 <a
-                  href={FB_PAGES.fullHouse.url}
+                  href="https://www.facebook.com/share/18sdgkeXCu/?mibextid=wwXIfr"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="rounded-full border border-[#FF1493] bg-[#1877F2] px-4 py-1.5 font-bold uppercase text-xs tracking-wider text-white shadow hover:scale-105 transition"
@@ -564,13 +564,13 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
               </div>
 
               <a
-                href={FB_PAGES.fullHouse.url}
+                href="https://www.facebook.com/share/18sdgkeXCu/?mibextid=wwXIfr"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-4 inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-[#1877F2] to-[#FF1493] py-3 text-center font-bold uppercase text-xs tracking-wider text-white shadow hover:brightness-110 transition"
               >
                 <Facebook className="h-4 w-4" />
-                <span>Follow {FB_PAGES.fullHouse.name} on Facebook</span>
+                <span>Follow Full House Fan Club on Facebook</span>
               </a>
             </div>
           </div>
@@ -628,22 +628,22 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
             </div>
             <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-medium text-sm text-[#F5E6C8]/80">
               <a
-                href={FB_PAGES.beverlyHills.url}
+                href="https://www.facebook.com/share/19P1xEugxs/?mibextid=wwXIfr"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-[#00D9FF] hover:underline"
               >
                 <Facebook className="h-3.5 w-3.5" />
-                <span>90210 Fan ({FB_PAGES.beverlyHills.followers})</span>
+                <span>90210 Fan (8.2K)</span>
               </a>
               <a
-                href={FB_PAGES.fullHouse.url}
+                href="https://www.facebook.com/share/18sdgkeXCu/?mibextid=wwXIfr"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-[#FFD24A] hover:underline"
               >
                 <Facebook className="h-3.5 w-3.5" />
-                <span>Full House Fan ({FB_PAGES.fullHouse.followers})</span>
+                <span>Full House Fan (2.5K)</span>
               </a>
               <Link href="/about" className="hover:text-[#00D9FF] transition">About</Link>
               <Link href="/contact" className="hover:text-[#00D9FF] transition">Contact</Link>

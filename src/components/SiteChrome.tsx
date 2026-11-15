@@ -36,7 +36,7 @@ export function Socials({ className = "" }: { className?: string }) {
   return (
     <div className={`flex items-center gap-3 ${className}`}>
       <a
-        href={FB_PAGES.beverlyHills.url}
+        href="https://www.facebook.com/share/19P1xEugxs/?mibextid=wwXIfr"
         target="_blank"
         rel="noopener noreferrer"
         title="Beverly Hills 90210 Fan (8.2K Fans)"
@@ -44,10 +44,10 @@ export function Socials({ className = "" }: { className?: string }) {
         className="inline-flex items-center gap-1 text-[#00D9FF] hover:text-[#FF1493] transition"
       >
         <Facebook className="h-4 w-4" />
-        <span className="text-[10px] font-bold">90210 ({FB_PAGES.beverlyHills.followers})</span>
+        <span className="text-[10px] font-bold">90210 (8.2K)</span>
       </a>
       <a
-        href={FB_PAGES.fullHouse.url}
+        href="https://www.facebook.com/share/18sdgkeXCu/?mibextid=wwXIfr"
         target="_blank"
         rel="noopener noreferrer"
         title="Full House Fan Club (2.5K Fans)"
@@ -55,7 +55,7 @@ export function Socials({ className = "" }: { className?: string }) {
         className="inline-flex items-center gap-1 text-[#FFD24A] hover:text-[#FF1493] transition"
       >
         <Facebook className="h-4 w-4" />
-        <span className="text-[10px] font-bold">Full House ({FB_PAGES.fullHouse.followers})</span>
+        <span className="text-[10px] font-bold">Full House (2.5K)</span>
       </a>
       <Link href="/contact" aria-label="Follow on Pinterest" className="hover:text-[#00D9FF] transition"><Pinterest className="h-4 w-4" /></Link>
       <Link href="/contact" aria-label="Follow on Instagram" className="hover:text-[#00D9FF] transition"><Instagram className="h-4 w-4" /></Link>
@@ -122,10 +122,10 @@ export function Header() {
       <div className="flex items-center justify-center gap-4 overflow-x-auto border-t border-white/10 px-4 py-2 font-bold uppercase text-xs tracking-wider md:hidden">
         <Link href="/" className="text-[#00D9FF]">Home</Link>
         <Link href="/blog?cat=90s+TV+Sitcoms" className="text-[#F5E6C8]">Shows</Link>
-        <a href={FB_PAGES.beverlyHills.url} target="_blank" rel="noopener noreferrer" className="text-[#00D9FF] flex items-center gap-1">
+        <a href="https://www.facebook.com/share/19P1xEugxs/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-[#00D9FF] flex items-center gap-1">
           <Facebook className="h-3 w-3" /> 90210
         </a>
-        <a href={FB_PAGES.fullHouse.url} target="_blank" rel="noopener noreferrer" className="text-[#FFD24A] flex items-center gap-1">
+        <a href="https://www.facebook.com/share/18sdgkeXCu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-[#FFD24A] flex items-center gap-1">
           <Facebook className="h-3 w-3" /> Full House
         </a>
       </div>
@@ -184,22 +184,22 @@ export function Footer() {
 
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-medium text-sm text-[#F5E6C8]/80">
             <a
-              href={FB_PAGES.beverlyHills.url}
+              href="https://www.facebook.com/share/19P1xEugxs/?mibextid=wwXIfr"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-[#00D9FF] hover:underline"
             >
               <Facebook className="h-3.5 w-3.5" />
-              <span>90210 Fan ({FB_PAGES.beverlyHills.followers})</span>
+              <span>90210 Fan (8.2K)</span>
             </a>
             <a
-              href={FB_PAGES.fullHouse.url}
+              href="https://www.facebook.com/share/18sdgkeXCu/?mibextid=wwXIfr"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-[#FFD24A] hover:underline"
             >
               <Facebook className="h-3.5 w-3.5" />
-              <span>Full House Fan ({FB_PAGES.fullHouse.followers})</span>
+              <span>Full House Fan (2.5K)</span>
             </a>
             <Link href="/about" className="hover:text-[#00D9FF] transition">About</Link>
             <Link href="/contact" className="hover:text-[#00D9FF] transition">Contact</Link>
