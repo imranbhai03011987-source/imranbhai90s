@@ -119,8 +119,14 @@ export async function run(cmds: Cmd[]): Promise<unknown[]> {
 }
 
 export function toObj(flat: unknown): Record<string, string> {
-  const arr = (flat as string[] | null) ?? [];
+  if (!flat) return {};
+  if (typeof flat === "object" && !Array.isArray(flat)) {
+    return flat as Record<string, string>;
+  }
+  const arr = Array.isArray(flat) ? (flat as string[]) : [];
   const o: Record<string, string> = {};
-  for (let i = 0; i < arr.length; i += 2) o[arr[i]] = arr[i + 1];
+  for (let i = 0; i < arr.length; i += 2) {
+    if (arr[i] !== undefined) o[arr[i]] = arr[i + 1];
+  }
   return o;
 }
