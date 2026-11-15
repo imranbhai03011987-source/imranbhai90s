@@ -17,7 +17,6 @@ export async function POST(req: Request) {
     const json = await handleUpload({
       body,
       request: req,
-      token: process.env.BLOB_READ_WRITE_TOKEN,
       onBeforeGenerateToken: async () => ({
         allowedContentTypes: [
           "image/jpeg", "image/png", "image/webp", "image/gif", "image/avif",

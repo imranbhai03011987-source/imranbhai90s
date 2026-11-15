@@ -25,7 +25,7 @@ export async function POST(req: Request) {
       const safe = file.name.replace(/[^a-zA-Z0-9._-]+/g, "-").slice(-80);
       const blob = await put(`articles/${Date.now()}-${safe}`, file, {
         access: "public",
-        token: process.env.BLOB_READ_WRITE_TOKEN,
+        token: process.env.BLOB_READ_WRITE_TOKEN || undefined,
       });
       return NextResponse.json({ url: blob.url });
     } catch (err) {
