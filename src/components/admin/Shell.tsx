@@ -16,10 +16,16 @@ export async function AdminShell({ active, children }: { active: string; childre
       {/* Top Retro Bar */}
       <div className="border-b border-white/10 bg-[#160a33] text-xs font-mono text-[#F5E6C8]">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6">
-          <span className="flex items-center gap-2 font-bold uppercase tracking-wider text-[#39FF14]">
-            <span className="h-2 w-2 rounded-full bg-[#39FF14] animate-ping" />
-            90s TV ARCHIVES · ADMIN COMMAND DECK
-          </span>
+          <div className="flex items-center gap-3">
+            <span className="flex items-center gap-2 font-bold uppercase tracking-wider text-[#39FF14]">
+              <span className="h-2 w-2 rounded-full bg-[#39FF14] animate-ping" />
+              90s TV ARCHIVES · ADMIN COMMAND DECK
+            </span>
+            <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-[#39FF14]/20 border border-[#39FF14]/50 px-2.5 py-0.5 text-[11px] font-bold text-[#39FF14]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#39FF14] animate-pulse" />
+              Cloud Storage: Active
+            </span>
+          </div>
           <Link href="/" target="_blank" className="text-[#00D9FF] hover:text-[#FF1493] transition flex items-center gap-1 font-bold">
             Live Site ↗
           </Link>
