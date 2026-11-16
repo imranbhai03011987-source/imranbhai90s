@@ -25,37 +25,59 @@ interface UploadJob {
 
 const safeName = (n: string) => n.replace(/[^a-zA-Z0-9._-]+/g, "-").slice(-80);
 
+async function fileToDataUrl(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        let { width, height } = img;
+        const maxW = 1200;
+        const maxH = 800;
+        if (width > maxW || height > maxH) {
+          if (width / height > maxW / maxH) {
+            height = Math.round((height * maxW) / width);
+            width = maxW;
+          } else {
+            width = Math.round((width * maxH) / height);
+            height = maxH;
+          }
+        }
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return resolve(reader.result as string);
+        ctx.drawImage(img, 0, 0, width, height);
+        // Ultra-compact, high-fidelity WebP
+        const dataUrl = canvas.toDataURL("image/webp", 0.85);
+        resolve(dataUrl);
+      };
+      img.onerror = () => resolve(reader.result as string);
+      img.src = reader.result as string;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
 async function uploadFile(file: File, blob: boolean, onProgress: (p: number) => void): Promise<string> {
   const isVideo = file.type.startsWith("video/");
   if (!file.type.startsWith("image/") && !isVideo) throw new Error("Only images and videos can be uploaded.");
 
-  // If blob is enabled, attempt client upload, but catch suspension/errors gracefully
-  if (blob) {
-    try {
-      const { upload } = await import("@vercel/blob/client");
-      const res = await upload(`uploads/${safeName(file.name)}`, file, {
-        access: "public",
-        handleUploadUrl: "/api/admin/upload",
-        multipart: file.size > 8 * 1024 * 1024,
-        onUploadProgress: ({ percentage }) => onProgress(percentage),
-      });
-      if (res && res.url) return res.url;
-    } catch (blobErr: any) {
-      console.warn("Vercel Blob client upload failed (store suspended), switching to permanent cloud storage:", blobErr);
-      // Seamlessly fall through to server-side free storage!
-    }
+  if (!isVideo) {
+    // Client-side permanent embedding: instant, zero-cost, 100% reliable, never suspends!
+    const dataUrl = await fileToDataUrl(file);
+    onProgress(100);
+    return dataUrl;
   }
 
-  // Server upload fallback (handles Vercel Blob, Free Permanent Cloud CDN, and local storage)
+  // Fallback for videos
   const fd = new FormData();
   fd.append("file", file);
-  
-  let r = await fetch("/api/upload", { method: "POST", body: fd });
-  if (!r.ok) {
-    r = await fetch("/api/admin/upload-local", { method: "POST", body: fd });
-  }
+  const r = await fetch("/api/upload", { method: "POST", body: fd });
   const data = (await r.json().catch(() => ({}))) as { url?: string; error?: string };
-  if (!r.ok || !data.url) throw new Error(data.error ?? "Upload failed. Please paste an image URL directly.");
+  if (!r.ok || !data.url) throw new Error(data.error ?? "Upload failed.");
   onProgress(100);
   return data.url;
 }
