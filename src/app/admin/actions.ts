@@ -55,6 +55,12 @@ export async function save(_: string | null, form: FormData): Promise<string | n
 
   const now = new Date().toISOString();
   const theme = (str("theme") in THEMES ? str("theme") : "sunset") as ThemeKey;
+  const rawImageUrl = str("imageUrl");
+  const validImageUrl =
+    rawImageUrl.startsWith("data:image/") || /^(https?:\/\/|\/(?!\/))[^\s"'()]+$/.test(rawImageUrl)
+      ? rawImageUrl
+      : undefined;
+
   const post: Post = {
     id: existing?.id ?? crypto.randomUUID(),
     slug,
@@ -64,7 +70,7 @@ export async function save(_: string | null, form: FormData): Promise<string | n
     category: str("category") || "Memories",
     tags: tags.length > 0 ? tags : undefined,
     theme,
-    imageUrl: /^(https?:\/\/|\/(?!\/))[^\s"'()]+$/.test(str("imageUrl")) ? str("imageUrl") : undefined,
+    imageUrl: validImageUrl,
     status: str("status") === "draft" ? "draft" : "published",
     createdAt: existing?.createdAt ?? now,
     updatedAt: now,

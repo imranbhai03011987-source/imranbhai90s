@@ -20,7 +20,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPostBySlug((await params).slug);
   if (!post) return {};
   const image = coverUrl(post);
-  const absImage = image.startsWith("http") ? image : abs(image);
+  const absImage = image.startsWith("http")
+    ? image
+    : image.startsWith("data:")
+    ? abs("/images/articles/forgotten-90s-shows.jpg")
+    : abs(image);
   const url = abs(`/posts/${post.slug}`);
 
   // High-CTR title optimization for USA top ranking

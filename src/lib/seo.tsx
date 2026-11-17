@@ -6,7 +6,12 @@ export const DEFAULT_DESC =
   "Explore 90s TV nostalgia: TGIF sitcoms, Saturday morning cartoons, cast then and now updates, and untold secrets behind the iconic shows of the 1990s decade.";
 export const OG_IMAGE = "/images/stock/banner.jpg";
 
-export const abs = (path: string) => `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
+export const abs = (path: string) => {
+  if (!path) return SITE_URL;
+  if (path.startsWith("http://") || path.startsWith("https://")) return path;
+  if (path.startsWith("data:")) return `${SITE_URL}/images/articles/forgotten-90s-shows.jpg`;
+  return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
+};
 
 /** Renders a schema.org JSON-LD block. `<` is escaped so content can never close the script tag. */
 export function JsonLd({ data }: { data: object | object[] }) {

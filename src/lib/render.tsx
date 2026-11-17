@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-const safeUrl = (u: string) => /^(https?:\/\/|\/(?!\/))/.test(u);
+const safeUrl = (u: string) => /^(https?:\/\/|data:image\/|\/(?!\/))/.test(u);
 
 export const VIDEO_RE = /\.(mp4|webm|mov|m4v|ogv)(\?.*)?$/i;
 export const MEDIA_RE = /^!\[([^\]]*)\]\(([^)\s]+)\)(?:\{([^}]*)\})?$/;
