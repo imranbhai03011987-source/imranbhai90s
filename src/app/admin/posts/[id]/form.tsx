@@ -61,25 +61,34 @@ async function fileToDataUrl(file: File): Promise<string> {
   });
 }
 
-async function uploadFile(file: File, blob: boolean, onProgress: (p: number) => void): Promise<string> {
+async function uploadFile(file: File, onProgress: (p: number) => void): Promise<string> {
   const isVideo = file.type.startsWith("video/");
   if (!file.type.startsWith("image/") && !isVideo) throw new Error("Only images and videos can be uploaded.");
 
+  // 1. First try API upload (Cloudinary -> Free CDN -> local fs)
+  try {
+    const fd = new FormData();
+    fd.append("file", file);
+    onProgress(30);
+    const r = await fetch("/api/upload", { method: "POST", body: fd });
+    onProgress(75);
+    const data = (await r.json().catch(() => ({}))) as { url?: string; provider?: string; error?: string };
+    if (r.ok && data.url) {
+      onProgress(100);
+      return data.url;
+    }
+  } catch (apiErr) {
+    console.warn("API upload failed, trying browser WebP fallback:", apiErr);
+  }
+
+  // 2. Client-side permanent WebP conversion fallback (instant, zero-cost, 100% reliable)
   if (!isVideo) {
-    // Client-side permanent embedding: instant, zero-cost, 100% reliable, never suspends!
     const dataUrl = await fileToDataUrl(file);
     onProgress(100);
     return dataUrl;
   }
 
-  // Fallback for videos
-  const fd = new FormData();
-  fd.append("file", file);
-  const r = await fetch("/api/upload", { method: "POST", body: fd });
-  const data = (await r.json().catch(() => ({}))) as { url?: string; error?: string };
-  if (!r.ok || !data.url) throw new Error(data.error ?? "Upload failed.");
-  onProgress(100);
-  return data.url;
+  throw new Error("Upload failed. Please paste an image URL directly.");
 }
 
 export function EditorForm({ post, blobEnabled }: { post?: Post; blobEnabled: boolean }) {
@@ -99,6 +108,7 @@ export function EditorForm({ post, blobEnabled }: { post?: Post; blobEnabled: bo
   const [cover, setCover] = useState(post?.imageUrl ?? "");
   const [coverBusy, setCoverBusy] = useState(false);
   const [coverErr, setCoverErr] = useState("");
+  const [coverSuccess, setCoverSuccess] = useState("");
 
   const ta = useRef<HTMLTextAreaElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
@@ -176,7 +186,7 @@ export function EditorForm({ post, blobEnabled }: { post?: Post; blobEnabled: bo
       const id = ++jobId.current;
       setJobs((j) => [...j, { id, name: file.name, progress: 0 }]);
       try {
-        const url = await uploadFile(file, blobEnabled, (p) =>
+        const url = await uploadFile(file, (p) =>
           setJobs((j) => j.map((x) => (x.id === id ? { ...x, progress: p } : x))),
         );
         setLibrary((l) => [{ url, name: file.name, video: file.type.startsWith("video/") }, ...l]);
@@ -220,10 +230,13 @@ export function EditorForm({ post, blobEnabled }: { post?: Post; blobEnabled: bo
   async function uploadCover(file?: File) {
     if (!file) return;
     setCoverErr("");
+    setCoverSuccess("");
     setCoverBusy(true);
     try {
       if (!file.type.startsWith("image/")) throw new Error("Cover must be an image.");
-      setCover(await uploadFile(file, blobEnabled, () => {}));
+      const url = await uploadFile(file, () => {});
+      setCover(url);
+      setCoverSuccess(url.includes("cloudinary.com") ? "Uploaded to Cloudinary successfully!" : "Cover uploaded & attached successfully!");
     } catch (e) {
       setCoverErr((e as Error).message);
     }
@@ -610,6 +623,7 @@ export function EditorForm({ post, blobEnabled }: { post?: Post; blobEnabled: bo
             )}
           </div>
           <input ref={coverRef} type="file" accept="image/*" className="sr-only" onChange={(e) => { void uploadCover(e.target.files?.[0]); e.target.value = ""; }} />
+          {coverSuccess && <p className="mt-2 text-emerald-600 font-medium text-xs">✓ {coverSuccess}</p>}
           {coverErr && <p className="mt-2 text-pink">{coverErr}</p>}
           <p className="mt-2 text-xs font-normal text-ink/50">Without one, the coloured cover style below is used.</p>
         </div>

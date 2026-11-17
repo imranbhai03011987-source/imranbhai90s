@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { put } from "@vercel/blob";
+import { isCloudinaryConfigured, uploadToCloudinary } from "../../../lib/cloudinary";
 
 export const runtime = "nodejs";
 
@@ -42,16 +42,16 @@ async function uploadToFreeCdn(file: File): Promise<string | null> {
       }
     }
   } catch (e) {
-    console.warn("Free CDN upload failed, falling back to local:", e);
+    console.warn("Free CDN upload failed, falling back:", e);
   }
   return null;
 }
 
 /**
- * Robust Multi-Tier Upload Route:
- * Tier 1: Vercel Blob (if active & not suspended)
- * Tier 2: Free Permanent Cloud CDN (never suspends, free forever)
- * Tier 3: Local public directory fallback (/public/images/articles/)
+ * Resilient Upload Route:
+ * 1. Cloudinary (folder: '90stvmemories/articles')
+ * 2. Free Permanent Cloud CDN (instant, free, reliable)
+ * 3. Local storage fallback (/public/images/articles/)
  */
 export async function POST(req: Request) {
   try {
@@ -72,23 +72,21 @@ export async function POST(req: Request) {
 
     const safe = file.name.replace(/[^a-zA-Z0-9._-]+/g, "-").slice(-80);
     const fileName = `${Date.now()}-${safe}`;
+    const buffer = Buffer.from(await file.arrayBuffer());
 
-    // Tier 1: Try Vercel Blob if token is available
-    if (process.env.BLOB_READ_WRITE_TOKEN) {
+    // Tier 1: Cloudinary
+    if (isCloudinaryConfigured()) {
       try {
-        const blob = await put(`articles/${fileName}`, file, {
-          access: "public",
-          token: process.env.BLOB_READ_WRITE_TOKEN,
-        });
-        if (blob && blob.url) {
-          return NextResponse.json({ url: blob.url, provider: "vercel-blob" });
+        const cloudUrl = await uploadToCloudinary(buffer, "90stvmemories/articles", fileName);
+        if (cloudUrl) {
+          return NextResponse.json({ url: cloudUrl, provider: "cloudinary" });
         }
-      } catch (blobErr: any) {
-        console.warn("Vercel Blob failed or suspended:", blobErr?.message || blobErr);
+      } catch (cloudErr: any) {
+        console.warn("Cloudinary upload failed, falling back:", cloudErr?.message || cloudErr);
       }
     }
 
-    // Tier 2: Free Permanent Cloud CDN (Instant, reliable, never suspends)
+    // Tier 2: Free Permanent Cloud CDN
     const cdnUrl = await uploadToFreeCdn(file);
     if (cdnUrl) {
       return NextResponse.json({ url: cdnUrl, provider: "free-cloud-cdn" });
@@ -100,7 +98,6 @@ export async function POST(req: Request) {
       const path = await import("node:path");
       const dir = path.join(process.cwd(), "public", "images", "articles");
       await fs.mkdir(dir, { recursive: true });
-      const buffer = Buffer.from(await file.arrayBuffer());
       await fs.writeFile(path.join(dir, fileName), buffer);
       return NextResponse.json({ url: `/images/articles/${fileName}`, provider: "local-fs" });
     } catch (fsErr) {

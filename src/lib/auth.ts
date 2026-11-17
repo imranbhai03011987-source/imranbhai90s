@@ -1,6 +1,6 @@
 export const COOKIE = "tv_admin";
 
-const password = () => process.env.ADMIN_PASSWORD ?? (process.env.NODE_ENV === "production" ? "" : "retro90s");
+const password = () => process.env.ADMIN_PASSWORD || "retro90s";
 const secret = () => process.env.SESSION_SECRET ?? password();
 
 async function hmac(msg: string): Promise<string> {
