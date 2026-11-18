@@ -72,9 +72,27 @@ export default async function Dashboard({ searchParams }: { searchParams: Promis
       </div>
 
       {!usingRedis && (
-        <p className="mt-5 rounded-xl border-2 border-sun/60 bg-sun/10 px-4 py-3 text-sm text-amber-600">
-          Local mode: data is saved to <code>.data/db.json</code>. Connect Upstash Redis (see README) before deploying so stats persist on serverless.
-        </p>
+        <div className="mt-5 rounded-2xl border-2 border-[#00D9FF] bg-[#160a33] p-4 text-white shadow-[0_0_20px_rgba(0,217,255,0.2)]">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div>
+              <p className="font-head text-lg font-bold text-[#39FF14] flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-[#39FF14] animate-ping" />
+                Live Visitor Tracking: Standby Mode
+              </p>
+              <p className="mt-1 text-xs text-white/80">
+                To save and display every US visitor count permanently on Vercel, connect free Upstash Redis database.
+              </p>
+            </div>
+            <a
+              href="https://vercel.com/imranbhai03011987-8049/90stvmemories/stores"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#FF1493] px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-[0_0_15px_rgba(255,20,147,0.5)] hover:bg-[#FF1493]/90 transition shrink-0"
+            >
+              Connect Free Database ↗
+            </a>
+          </div>
+        </div>
       )}
 
       {/* KPI tiles */}

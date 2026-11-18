@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import fallbackStats from "../data/fallbackStats.json";
 
 type Cmd = (string | number)[];
 
@@ -49,7 +50,7 @@ function load(): Local {
   try {
     mem = JSON.parse(fs.readFileSync(FILE, "utf8")) as Local;
   } catch {
-    mem = { h: {}, s: {}, l: {} };
+    mem = JSON.parse(JSON.stringify(fallbackStats)) as Local;
   }
   return mem;
 }
