@@ -1,12 +1,39 @@
-name: Daily Auto-Post Bot [DISABLED]
+name: Daily 90s TV Memories Publisher
 
-# BOT IS COMPLETELY DISABLED AS REQUESTED BY USER
 on:
-  workflow_dispatch: # Manual only, no schedule
+  schedule:
+    # Runs every day at 13:00 UTC (6:00 PM PKT / 9:00 AM EST)
+    - cron: '0 13 * * *'
+  workflow_dispatch: # Allows manual 1-click execution anytime from GitHub Actions tab
+
+permissions:
+  contents: write
 
 jobs:
-  disabled_notice:
+  publish_daily:
     runs-on: ubuntu-latest
     steps:
-      - name: Bot Disabled Notice
-        run: echo "Daily Auto-Post Bot is turned off."
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run Daily Article Publisher
+        run: python bot/publish_daily.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "90s TV Memories Cloud Bot"
+          git config --global user.email "bot@90stvmemories.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No changes to commit. All queue articles already published."
+          else
+            git commit -m "Auto-publish daily SEO article from queue"
+            git push origin main
+          fi
