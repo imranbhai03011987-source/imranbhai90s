@@ -64,8 +64,16 @@ export function Prose({ content }: { content: string }) {
             </figure>
           );
         }
-        if (t.startsWith("## ")) return <h2 key={i}>{inline(t.slice(3))}</h2>;
-        if (t.startsWith("### ")) return <h3 key={i}>{inline(t.slice(4))}</h3>;
+        if (t.startsWith("## ")) {
+          const headingText = t.slice(3).trim();
+          const slugId = headingText.toLowerCase().replace(/[^\w\s-]/g, "").replace(/\s+/g, "-");
+          return <h2 key={i} id={slugId} className="scroll-mt-20">{inline(headingText)}</h2>;
+        }
+        if (t.startsWith("### ")) {
+          const headingText = t.slice(4).trim();
+          const slugId = headingText.toLowerCase().replace(/[^\w\s-]/g, "").replace(/\s+/g, "-");
+          return <h3 key={i} id={slugId} className="scroll-mt-20">{inline(headingText)}</h3>;
+        }
         if (t.startsWith("> ")) return <blockquote key={i}>{inline(t.replace(/^> ?/gm, " ").trim())}</blockquote>;
         if (/^[-*] /.test(t))
           return (

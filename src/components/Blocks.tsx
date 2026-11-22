@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { Chevron } from "./icons";
 import { MailForm } from "./MailForm";
-import { Cover } from "./PostCard";
+import { Cover, PostCard } from "./PostCard";
 import { TrackedLink } from "./Tracked";
 import { fmtDate } from "../lib/dates";
 import type { Post } from "../lib/posts";

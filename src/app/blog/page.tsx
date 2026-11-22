@@ -11,13 +11,19 @@ export const metadata: Metadata = {
 };
 export const revalidate = 60;
 
-export default async function Blog({ searchParams }: { searchParams: Promise<{ cat?: string; q?: string; page?: string }> }) {
-  const { cat = "", q = "", page = "1" } = await searchParams;
+export default async function Blog({ searchParams }: { searchParams?: Promise<{ cat?: string; q?: string; page?: string }> | { cat?: string; q?: string; page?: string } }) {
+  const resolved = searchParams ? await Promise.resolve(searchParams) : {};
+  const { cat = "", q = "", page = "1" } = resolved || {};
   const stories = await getStoryPosts();
-  const categories = [...new Set(stories.map((p) => p.category))];
-  const needle = q.trim().toLowerCase();
-  const filtered = stories.filter((p) => (!cat || p.category === cat) && (!needle || `${p.title} ${p.excerpt}`.toLowerCase().includes(needle)));
-  const { slice, pages, page: cur } = paginate(filtered, Number(page), 9);
+  const categories = [...new Set(stories.map((p) => p.category).filter(Boolean))];
+  const needle = (q || "").trim().toLowerCase();
+  const catNeedle = (cat || "").trim().toLowerCase();
+  const filtered = stories.filter((p) => {
+    const matchesCat = !catNeedle || (p.category && p.category.toLowerCase() === catNeedle);
+    const matchesQuery = !needle || `${p.title || ""} ${p.excerpt || ""}`.toLowerCase().includes(needle);
+    return matchesCat && matchesQuery;
+  });
+  const { slice, pages, page: cur } = paginate(filtered, Number(page) || 1, 9);
   const href = (n: number) => `/blog?${new URLSearchParams({ ...(cat && { cat }), ...(q && { q }), page: String(n) })}`;
 
   return (

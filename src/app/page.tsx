@@ -10,9 +10,32 @@ export const revalidate = 60;
 
 export const metadata = {
   title: { absolute: "90s TV Memories | Best 90s Shows, TGIF, Cartoons & Cast Then and Now [2026]" },
-  description: "Relive the golden era of 90s television: Saturday morning cartoons, TGIF sitcoms, VHS rental nostalgia, and untold behind-the-scenes stories.",
+  description: "Relive the golden era of 90s television: TGIF sitcoms, Saturday morning cartoons, cast then and now updates, and untold behind-the-scenes stories. Explore now!",
   alternates: { canonical: "/" },
 };
+
+export const HOMEPAGE_FAQS = [
+  {
+    q: "What are the most popular 90s TV shows?",
+    a: "The most popular 90s television shows include primetime sitcom giants like Friends, Seinfeld, The Fresh Prince of Bel-Air, and Home Improvement, alongside beloved TGIF family hits like Full House, Family Matters, and Boy Meets World. Iconic teen dramas such as Beverly Hills, 90210 and Dawson's Creek, as well as cult supernatural mysteries like The X-Files and Twin Peaks, defined an unforgettable decade of broadcast entertainment.",
+  },
+  {
+    q: "Where can I find 90s TV cast then and now updates?",
+    a: "At 90s TV Memories, we publish comprehensive 2026 cast retrospectives detailing where your favorite 1990s stars are today. Our in-depth articles feature verified biographical updates, recent career projects, tragic passings, and exclusive behind-the-scenes reunion memories for shows like Full House, Saved by the Bell, Beverly Hills 90210, and Family Matters.",
+  },
+  {
+    q: "What made 90s sitcoms different from today's shows?",
+    a: "1990s sitcoms stood apart through multi-camera soundstages filmed in front of live studio audiences, creating authentic theatrical comedic energy. They combined genuine family warmth and moral life lessons with relatable, character-driven humor without relying on heavy CGI, binge-watching cliffhangers, or cynical storylines prevalent in modern streaming series.",
+  },
+  {
+    q: "Which 90s cartoons are still popular today?",
+    a: "Legendary 1990s animated classics that remain massive cultural touchstones today include Pokémon, Rugrats, Batman: The Animated Series, X-Men: The Animated Series, Animaniacs, Hey Arnold!, Sailor Moon, and DuckTales. Many of these series have inspired successful modern revivals, feature films, and dedicated global fan conventions.",
+  },
+  {
+    q: "Where can I watch classic 90s TV shows online?",
+    a: "Classic 1990s television favorites are widely available on leading US streaming services. Friends and The Fresh Prince of Bel-Air stream on Max; Full House and Family Matters are available on Hulu and Max; Boy Meets World streams on Disney+; That '70s Show is on Peacock; and Beverly Hills, 90210 can be watched on Paramount+ and Pluto TV.",
+  },
+];
 
 /* Nickelodeon-style green slime dripping from top corners */
 function CornerSlime() {
@@ -50,18 +73,32 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
     <div className="relative min-h-screen bg-[#0a0a23] bg-gradient-to-b from-[#1a0a3a] via-[#10082b] to-[#0a0a23] text-white selection:bg-[#FF1493] selection:text-white">
       <CornerSlime />
 
-      {/* JSON-LD Schema */}
+      {/* JSON-LD Schema: ItemList + FAQPage for Google Rich Snippets */}
       <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "ItemList",
-          itemListElement: stories.slice(0, 10).map((p, i) => ({
-            "@type": "ListItem",
-            position: i + 1,
-            url: abs(`/posts/${p.slug}`),
-            name: p.title,
-          })),
-        }}
+        data={[
+          {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            itemListElement: stories.slice(0, 10).map((p, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              url: abs(`/posts/${p.slug}`),
+              name: p.title,
+            })),
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: HOMEPAGE_FAQS.map((faq) => ({
+              "@type": "Question",
+              name: faq.q,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: faq.a,
+              },
+            })),
+          },
+        ]}
       />
 
       {/* ========================================================
@@ -180,9 +217,14 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
               <span>TGIF • VHS • SATURDAY MORNING</span>
             </div>
 
-            {/* Big heading: I LOVE 90s TV */}
-            <h1 className="mt-4 font-[family-name:var(--font-bebas)] text-6xl leading-[0.95] tracking-wider text-[#FF1493] text-stroke-cyan-lg sm:text-7xl lg:text-8xl xl:text-9xl">
+            {/* Retro Display Brand Tagline */}
+            <div className="mt-4 font-[family-name:var(--font-bebas)] text-6xl leading-[0.95] tracking-wider text-[#FF1493] text-stroke-cyan-lg sm:text-7xl lg:text-8xl xl:text-9xl select-none" aria-hidden="true">
               I LOVE 90s TV
+            </div>
+
+            {/* Keyword-Rich H1 for Google SEO */}
+            <h1 className="mt-3 font-head text-2xl sm:text-3xl lg:text-4xl uppercase tracking-wide text-[#00D9FF] font-bold drop-shadow-[0_0_15px_rgba(0,217,255,0.4)]">
+              90s TV Memories — Your Nostalgia Hub for Classic Shows, Cast Updates &amp; Behind-the-Scenes Stories
             </h1>
 
             {/* Subtext in beige #F5E6C8 */}
@@ -578,7 +620,49 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
       </section>
 
       {/* ========================================================
-          4. NEWSLETTER FOOTER (Beige Input & Pink SUBSCRIBE)
+          4. FREQUENTLY ASKED QUESTIONS (Retro VHS Q&A)
+          ======================================================== */}
+      <section className="relative px-4 py-16 sm:px-6 lg:px-12 border-t-2 border-[#FF1493]/30 bg-[#0d0722]">
+        <div className="mx-auto max-w-[1100px]">
+          <div className="text-center">
+            <span className="inline-block -rotate-1 rounded bg-[#39FF14] px-3 py-1 font-mono text-xs font-bold uppercase text-black shadow-[2px_2px_0px_#000]">
+              📼 REWIND KNOWLEDGE ARCHIVE
+            </span>
+            <h2 className="mt-3 font-[family-name:var(--font-bebas)] text-4xl sm:text-5xl lg:text-6xl tracking-wider text-[#FF1493] text-stroke-cyan-sm">
+              FREQUENTLY ASKED QUESTIONS
+            </h2>
+            <p className="mx-auto mt-2 max-w-2xl font-serif text-base text-[#F5E6C8]">
+              Everything you need to know about 1990s television history, where to stream classic shows, and our verified cast updates.
+            </p>
+          </div>
+
+          <div className="mt-10 space-y-4">
+            {HOMEPAGE_FAQS.map((faq, idx) => (
+              <details
+                key={idx}
+                className="group overflow-hidden rounded-xl border-2 border-black bg-[#160a33] text-[#F5E6C8] shadow-[4px_4px_0px_#FF1493] transition-all hover:border-[#00D9FF]"
+                {...(idx === 0 ? { open: true } : {})}
+              >
+                <summary className="flex cursor-pointer items-center justify-between p-5 font-head text-xl font-bold uppercase tracking-wide text-[#F5E6C8] group-hover:text-[#00D9FF] transition">
+                  <span className="flex items-center gap-3">
+                    <span className="font-mono text-sm text-[#FF1493]">0{idx + 1}.</span>
+                    <span>{faq.q}</span>
+                  </span>
+                  <span className="ml-4 font-mono text-xl text-[#00D9FF] group-open:rotate-45 transition-transform duration-200">
+                    +
+                  </span>
+                </summary>
+                <div className="border-t border-white/10 bg-black/30 p-5 font-serif text-base leading-relaxed text-[#F5E6C8]/90">
+                  <p>{faq.a}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================
+          5. NEWSLETTER FOOTER (Beige Input & Pink SUBSCRIBE)
           ======================================================== */}
       <footer className="relative mt-20 border-t-2 border-[#FF1493]/40 bg-[#070517] pt-16 pb-12 text-[#F5E6C8]">
         {/* Green Slime Drips on Section Divider */}

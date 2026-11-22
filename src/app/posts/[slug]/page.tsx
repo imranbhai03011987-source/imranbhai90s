@@ -86,6 +86,15 @@ export default async function PostPage({ params }: Props) {
 
   const cleanShowName = post.title.split(/[:—–-]/)[0].trim();
 
+  const contentHeadings = post.content
+    .split("\n")
+    .filter((l) => l.startsWith("## "))
+    .map((l) => {
+      const title = l.slice(3).trim();
+      const id = title.toLowerCase().replace(/[^\w\s-]/g, "").replace(/\s+/g, "-");
+      return { title, id };
+    });
+
   const faqs = [
     {
       q: `What is the untold story behind ${cleanShowName}?`,
@@ -224,24 +233,35 @@ export default async function PostPage({ params }: Props) {
                 </a>
               </div>
 
-              {/* Quick Table of Contents / Tape Index (Boosts Google CTR and user engagement) */}
-              <div className="mb-8 rounded-xl border border-black/15 bg-black/5 p-4 sm:p-5">
-                <p className="font-mono text-xs font-bold uppercase tracking-wider text-black flex items-center gap-2">
-                  <span>📼</span> TAPE INDEX / TABLE OF CONTENTS
-                </p>
-                <ul className="mt-3 space-y-1.5 font-sans text-xs font-medium text-black/80 list-disc list-inside">
-                  <li>Introduction &amp; Nostalgic Background</li>
-                  <li>Untold Backstage Secrets &amp; Behind-the-Scenes Facts</li>
-                  <li>Cast Then &amp; Now: Where Are They Today in 2026?</li>
-                  <li>Cultural Legacy &amp; Where to Watch Classic Episodes</li>
-                  <li>Frequently Asked Questions (FAQ)</li>
-                </ul>
-              </div>
+              {/* Dynamic Table of Contents / Tape Index (Boosts Google CTR and user engagement) */}
+              {contentHeadings.length > 0 && (
+                <div className="mb-8 rounded-xl border-2 border-black/20 bg-black/5 p-4 sm:p-6 shadow-sm">
+                  <p className="font-mono text-xs font-bold uppercase tracking-wider text-black flex items-center gap-2">
+                    <span>📼</span> TAPE INDEX / TABLE OF CONTENTS
+                  </p>
+                  <nav aria-label="Table of Contents" className="mt-3">
+                    <ol className="space-y-2 font-sans text-xs sm:text-sm font-semibold text-black/85 list-decimal list-inside">
+                      {contentHeadings.map((h, idx) => (
+                        <li key={idx}>
+                          <a href={`#${h.id}`} className="hover:text-[#FF1493] hover:underline transition">
+                            {h.title}
+                          </a>
+                        </li>
+                      ))}
+                      <li>
+                        <a href="#article-faqs" className="hover:text-[#FF1493] hover:underline transition">
+                          Frequently Asked Questions (FAQ)
+                        </a>
+                      </li>
+                    </ol>
+                  </nav>
+                </div>
+              )}
 
               <Prose content={post.content} />
 
               {/* Frequently Asked Questions Section (Matches JSON-LD FAQPage Schema) */}
-              <div className="my-10 rounded-xl border-2 border-black/20 bg-black/5 p-6 sm:p-8">
+              <div id="article-faqs" className="my-10 scroll-mt-20 rounded-xl border-2 border-black/20 bg-black/5 p-6 sm:p-8">
                 <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#FF1493]">
                   📼 90s REWIND ARCHIVE FAQ
                 </span>
