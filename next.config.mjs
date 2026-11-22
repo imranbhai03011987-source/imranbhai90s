@@ -27,8 +27,8 @@ const config = {
           permanent: true,
         },
         {
-          source: "/posts/full-house-cast-then-and-now",
-          destination: "/posts/full-house-cast-then-and-now-untold-secrets-olsen-twins",
+          source: "/posts/full-house-cast-then-and-now-untold-secrets-olsen-twins",
+          destination: "/posts/full-house-cast-then-and-now",
           permanent: true,
         },
         {
@@ -37,14 +37,22 @@ const config = {
           permanent: true,
         },
         {
-          source: "/posts/saved-by-the-bell-cast-then-and-now",
-          destination: "/posts/saved-by-the-bell-dustin-diamond-tragedy-backstage-secrets",
+          source: "/posts/saved-by-the-bell-dustin-diamond-tragedy-backstage-secrets",
+          destination: "/posts/saved-by-the-bell-cast-then-and-now",
           permanent: true,
         },
         {
           source: "/posts/full-house-secrets-heartbreaking-tragedies-cast-today",
-          destination: "/posts/full-house-cast-then-and-now-untold-secrets-olsen-twins",
+          destination: "/posts/full-house-cast-then-and-now",
           permanent: true,
+        },
+      ];
+    },
+    async rewrites() {
+      return [
+        {
+          source: "/:slug(full-house-cast-then-and-now|saved-by-the-bell-cast-then-and-now|family-matters-cast-then-and-now|boy-meets-world-cast-then-and-now|fresh-prince-cast-then-and-now|friends-cast-then-and-now|top-20-90s-sitcoms|15-forgotten-90s-tv-shows|best-90s-cartoon-themes|why-90s-tv-was-better)",
+          destination: "/posts/:slug",
         },
       ];
     },
