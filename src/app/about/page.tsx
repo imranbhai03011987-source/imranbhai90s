@@ -6,7 +6,7 @@ import { getPublished } from "../../lib/posts";
 import { JsonLd, breadcrumbLd, abs } from "../../lib/seo";
 
 export const metadata: Metadata = {
-  title: "About 90s TV Memories",
+  title: { absolute: "About 90s TV Memories — Your Nostalgia Hub for Classic TV Shows" },
   description: "90s TV Memories is an independent US fan site for cartoons, sitcoms, VHS rentals and the TV rituals that raised a generation of 90s kids.",
   alternates: { canonical: "/about" },
 };

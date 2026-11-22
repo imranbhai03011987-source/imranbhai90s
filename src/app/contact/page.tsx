@@ -5,7 +5,7 @@ import { Check } from "../../components/icons";
 import { MailForm } from "../../components/MailForm";
 
 export const metadata: Metadata = {
-  title: "Contact 90s TV Memories",
+  title: { absolute: "Contact Us | 90s TV Memories" },
   description: "Share your favorite 90s TV memory, suggest a story or send the 90s TV Memories team a note.",
   alternates: { canonical: "/contact" },
 };

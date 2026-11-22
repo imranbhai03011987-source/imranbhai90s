@@ -1,7 +1,7 @@
 import { LoginForm } from "./form";
 import { Logo } from "../../../components/SiteChrome";
 
-export const metadata = { title: "Admin Login | 90s TV Memories", robots: { index: false } };
+export const metadata = { title: { absolute: "Admin Login | 90s TV Memories" }, robots: { index: false } };
 
 export default function LoginPage() {
   return (

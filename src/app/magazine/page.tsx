@@ -8,7 +8,7 @@ import { MailForm } from "../../components/MailForm";
 import { getStoryPosts } from "../../lib/posts";
 
 export const metadata: Metadata = {
-  title: "Magazine: 90s TV Nostalgia Stories",
+  title: { absolute: "Magazine: 90s TV Nostalgia Stories | 90s TV Memories" },
   description: "A magazine-style front page for 90s TV nostalgia: cartoons, sitcoms, movies on VHS and the gadgets we grew up with.",
   alternates: { canonical: "/magazine" },
 };

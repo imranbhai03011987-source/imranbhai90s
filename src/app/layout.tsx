@@ -20,7 +20,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "90s TV Memories | Best 90s Shows, TGIF, Cartoons & Cast Then and Now [2026]",
+    default: "90s TV Memories — Your Nostalgia Hub for Classic Shows, Cast Updates & Behind-the-Scenes Stories",
     template: "%s | 90s TV Memories",
   },
   description: DEFAULT_DESC,
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     siteName: "90s TV Memories",
     locale: "en_US",
     url: "/",
-    title: "90s TV Memories | Best 90s Shows, TGIF, Cartoons & Cast Then and Now [2026]",
+    title: "90s TV Memories — Your Nostalgia Hub for Classic Shows, Cast Updates & Behind-the-Scenes Stories",
     description: DEFAULT_DESC,
     images: [
       {
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "90s TV Memories | Best 90s Shows, TGIF, Cartoons & Cast Then and Now [2026]",
+    title: "90s TV Memories — Your Nostalgia Hub for Classic Shows, Cast Updates & Behind-the-Scenes Stories",
     description: DEFAULT_DESC,
     images: [OG_IMAGE],
   },

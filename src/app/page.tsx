@@ -9,7 +9,7 @@ import { FB_PAGES } from "../lib/site";
 export const revalidate = 60;
 
 export const metadata = {
-  title: { absolute: "90s TV Memories | Best 90s Shows, TGIF, Cartoons & Cast Then and Now [2026]" },
+  title: { absolute: "90s TV Memories — Your Nostalgia Hub for Classic Shows, Cast Updates & Behind-the-Scenes Stories" },
   description: "Relive the golden era of 90s television: TGIF sitcoms, Saturday morning cartoons, cast then and now updates, and untold behind-the-scenes stories. Explore now!",
   alternates: { canonical: "/" },
 };

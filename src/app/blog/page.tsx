@@ -5,7 +5,7 @@ import { Search } from "../../components/icons";
 import { getStoryPosts } from "../../lib/posts";
 
 export const metadata: Metadata = {
-  title: "90s TV Stories: Cartoons, Sitcoms & VHS Memories",
+  title: { absolute: "90s TV Stories: Cartoons, Sitcoms & VHS Memories | 90s TV Memories" },
   description: "Browse every 90s TV Memories story: Saturday morning cartoons, TGIF sitcoms, VHS rentals and retro tech. Search by show or topic.",
   alternates: { canonical: "/blog" },
 };

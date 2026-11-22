@@ -27,14 +27,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     : abs(image);
   const url = abs(`/posts/${post.slug}`);
 
-  // High-CTR title optimization for USA top ranking
-  let clickableTitle = post.title;
-  if (!clickableTitle.includes("2026") && !clickableTitle.includes("Untold") && clickableTitle.length < 52) {
-    clickableTitle = `${clickableTitle} — Cast Then & Now (2026 Untold Secrets)`;
-  }
+  // Clean article title and format strictly as "[Article Title] | 90s TV Memories"
+  const baseTitle = post.title.trim().replace(/\s*\|\s*90s TV Memories.*$/i, "").trim();
+  const fullTitle = `${baseTitle} | 90s TV Memories`;
 
   return {
-    title: `${clickableTitle} | ${SITE_NAME}`,
+    title: { absolute: fullTitle },
     description: post.excerpt,
     keywords: post.tags?.length ? post.tags : [post.category, "90s TV", "Then and Now", "Untold Secrets", "1990s TV"],
     alternates: {
@@ -46,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       "content-language": "en-US",
     },
     openGraph: {
-      title: clickableTitle,
+      title: fullTitle,
       description: post.excerpt,
       type: "article",
       url,
@@ -67,7 +65,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         },
       ],
     },
-    twitter: { card: "summary_large_image", title: clickableTitle, description: post.excerpt, images: [absImage] },
+    twitter: { card: "summary_large_image", title: fullTitle, description: post.excerpt, images: [absImage] },
   };
 }
 

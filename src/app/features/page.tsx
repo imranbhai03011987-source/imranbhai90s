@@ -8,7 +8,7 @@ import { TrackedLink } from "../../components/Tracked";
 import { getStoryPosts } from "../../lib/posts";
 
 export const metadata: Metadata = {
-  title: "Featured 90s TV Stories & Top Picks",
+  title: { absolute: "Featured 90s TV Stories & Top Picks | 90s TV Memories" },
   description: "Top picks and featured stories about 90s cartoons, sitcoms and VHS-era TV from the 90s TV Memories archive.",
   alternates: { canonical: "/features" },
 };
