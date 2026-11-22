@@ -64,6 +64,42 @@ export function Prose({ content }: { content: string }) {
             </figure>
           );
         }
+        if (t === "---" || t === "***") {
+          return <hr key={i} className="my-8 border-t-2 border-black/15" />;
+        }
+        if (t.startsWith("|") && t.includes("\n|")) {
+          const lines = t.split("\n").map(l => l.trim()).filter(l => l.startsWith("|"));
+          if (lines.length >= 2) {
+            const headerCells = lines[0].split("|").slice(1, -1).map(c => c.trim());
+            // line 1 is separator | --- | --- |
+            const rowLines = lines.slice(2);
+            return (
+              <div key={i} className="my-8 overflow-x-auto rounded-xl border-2 border-black/30 bg-white shadow-[4px_4px_0px_#000]">
+                <table className="min-w-full divide-y-2 divide-black/20 text-left font-sans text-xs sm:text-sm">
+                  <thead className="bg-[#10082b] text-[#FFD24A] font-bold">
+                    <tr>
+                      {headerCells.map((h, hIdx) => (
+                        <th key={hIdx} className="px-4 py-3 border-r border-black/20 last:border-r-0 uppercase tracking-wider">{inline(h)}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-black/10 bg-white text-[#1a0a3a]">
+                    {rowLines.map((r, rIdx) => {
+                      const cells = r.split("|").slice(1, -1).map(c => c.trim());
+                      return (
+                        <tr key={rIdx} className={rIdx % 2 === 0 ? "bg-white" : "bg-[#F9F7F1]"}>
+                          {cells.map((c, cIdx) => (
+                            <td key={cIdx} className="px-4 py-3 border-r border-black/10 last:border-r-0 font-medium">{inline(c)}</td>
+                          ))}
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            );
+          }
+        }
         if (t.startsWith("## ")) {
           const headingText = t.slice(3).trim();
           const slugId = headingText.toLowerCase().replace(/[^\w\s-]/g, "").replace(/\s+/g, "-");

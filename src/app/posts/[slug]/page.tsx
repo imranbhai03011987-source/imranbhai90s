@@ -84,16 +84,39 @@ export default async function PostPage({ params }: Props) {
 
   const cleanShowName = post.title.split(/[:—–-]/)[0].trim();
 
-  const contentHeadings = post.content
+  // Extract custom FAQs from post.content if present
+  let parsedFaqs: { q: string; a: string }[] = [];
+  const faqSectionMatch = post.content.match(/## Frequently Asked Questions[\s\S]*?(?=\n## (?!Frequently)|$)/i);
+  if (faqSectionMatch) {
+    const rawFaqContent = faqSectionMatch[0].replace(/^## Frequently Asked Questions[^\n]*\n+/i, "");
+    const qBlocks = rawFaqContent.split(/\n(?=### )/).map((b) => b.trim()).filter(Boolean);
+    for (const block of qBlocks) {
+      if (block.startsWith("### ")) {
+        const lines = block.split("\n").map((l) => l.trim()).filter(Boolean);
+        const q = lines[0].slice(4).trim();
+        const a = lines.slice(1).join(" ").replace(/^>\s*/, "").trim();
+        if (q && a) {
+          parsedFaqs.push({ q, a });
+        }
+      }
+    }
+  }
+
+  const articleBodyContent = faqSectionMatch
+    ? post.content.replace(/## Frequently Asked Questions[\s\S]*?(?=\n## (?!Frequently)|$)/i, "").trim()
+    : post.content;
+
+  const contentHeadings = articleBodyContent
     .split("\n")
     .filter((l) => l.startsWith("## "))
     .map((l) => {
       const title = l.slice(3).trim();
       const id = title.toLowerCase().replace(/[^\w\s-]/g, "").replace(/\s+/g, "-");
       return { title, id };
-    });
+    })
+    .filter((h) => !h.title.toLowerCase().includes("frequently asked questions"));
 
-  const faqs = [
+  const faqs = parsedFaqs.length > 0 ? parsedFaqs : [
     {
       q: `What is the untold story behind ${cleanShowName}?`,
       a: `${cleanShowName} remains an iconic touchstone of 1990s television culture, packed with beloved storylines, memorable characters, and fascinating behind-the-scenes moments that shaped an entire generation.`,
@@ -256,7 +279,7 @@ export default async function PostPage({ params }: Props) {
                 </div>
               )}
 
-              <Prose content={post.content} />
+              <Prose content={articleBodyContent} />
 
               {/* Frequently Asked Questions Section (Matches JSON-LD FAQPage Schema) */}
               <div id="article-faqs" className="my-10 scroll-mt-20 rounded-xl border-2 border-black/20 bg-black/5 p-6 sm:p-8">

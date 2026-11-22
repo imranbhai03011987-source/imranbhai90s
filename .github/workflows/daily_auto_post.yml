@@ -2,8 +2,8 @@ name: Daily 90s TV Memories Publisher
 
 on:
   schedule:
-    # Runs every day at 13:00 UTC (6:00 PM PKT / 9:00 AM EST)
-    - cron: '0 13 * * *'
+    # Runs every day at 06:00 UTC (11:00 AM PKT / 2:00 AM EST)
+    - cron: '0 6 * * *'
   workflow_dispatch: # Allows manual 1-click execution anytime from GitHub Actions tab
 
 permissions:

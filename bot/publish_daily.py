@@ -56,14 +56,14 @@ def publish_next():
     # 2. Update fallbackStats.json
     stats = load_json(FALLBACK_STATS) or {}
     if 'h' in stats and 'posts' in stats['h']:
-        stats['h']['posts'][post_data['id']] = post_data
+        stats['h']['posts'][post_data['id']] = json.dumps(post_data)
         save_json(FALLBACK_STATS, stats)
         print(f"[BOT] Updated fallbackStats.json with {post_data['id']}")
 
     # 3. Update .data/db.json
     db = load_json(DB_PATH)
     if db and 'h' in db and 'posts' in db['h']:
-        db['h']['posts'][post_data['id']] = post_data
+        db['h']['posts'][post_data['id']] = json.dumps(post_data)
         save_json(DB_PATH, db)
         print(f"[BOT] Updated .data/db.json with {post_data['id']}")
 
@@ -94,7 +94,25 @@ def publish_next():
     save_json(QUEUE_PATH, queue)
     print(f"[BOT] Marked {next_article['id']} as published in queue.json")
     print(f"[SUCCESS] Article is now live: https://www.90stvmemories.com/posts/{post_data['slug']}")
+
+    # 5. Ping Search Engines
+    ping_search_engines()
     return True
+
+def ping_search_engines():
+    import urllib.request
+    sitemap_url = "https://www.90stvmemories.com/sitemap.xml"
+    endpoints = [
+        f"https://www.google.com/ping?sitemap={sitemap_url}",
+        f"https://www.bing.com/ping?sitemap={sitemap_url}"
+    ]
+    for ep in endpoints:
+        try:
+            req = urllib.request.Request(ep, headers={'User-Agent': 'Mozilla/5.0 (compatible; 90sTVMemoriesBot/1.0)'})
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                print(f"[BOT] Pinged search engine sitemap: {ep} (Status: {resp.status})")
+        except Exception as e:
+            print(f"[BOT] Ping notice for {ep}: {e}")
 
 if __name__ == "__main__":
     publish_next()

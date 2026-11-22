@@ -36,6 +36,16 @@ const config = {
           destination: "/posts/home-improvement-cast-then-and-now-where-are-they-in-2026",
           permanent: true,
         },
+        {
+          source: "/posts/saved-by-the-bell-cast-then-and-now",
+          destination: "/posts/saved-by-the-bell-dustin-diamond-tragedy-backstage-secrets",
+          permanent: true,
+        },
+        {
+          source: "/posts/full-house-secrets-heartbreaking-tragedies-cast-today",
+          destination: "/posts/full-house-cast-then-and-now-untold-secrets-olsen-twins",
+          permanent: true,
+        },
       ];
     },
   images: { remotePatterns: [{ protocol: "https", hostname: "**" }] },
