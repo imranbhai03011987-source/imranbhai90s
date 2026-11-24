@@ -191,7 +191,7 @@ export default async function PostPage({ params }: Props) {
             <span className="inline-block -rotate-1 rounded bg-[#FF1493] px-3.5 py-1 font-mono text-xs font-bold uppercase text-white shadow-[2px_2px_0px_#000]">
               ★ {post.category} • RETRO ARCHIVE ★
             </span>
-            <h1 className="mt-4 break-words font-head text-3xl sm:text-5xl lg:text-6xl tracking-wider text-[#FF1493] text-stroke-cyan drop-shadow-[0_0_20px_rgba(255,20,147,0.5)]">
+            <h1 className="mt-4 break-words font-head text-2xl sm:text-4xl lg:text-5xl xl:text-6xl tracking-wider text-[#FF1493] text-stroke-cyan drop-shadow-[0_0_20px_rgba(255,20,147,0.5)]">
               {post.title}
             </h1>
             <p className="mt-3 font-mono text-xs sm:text-sm text-[#F5E6C8]/90">
@@ -200,12 +200,12 @@ export default async function PostPage({ params }: Props) {
           </div>
         </section>
 
-        <section className="bg-transparent py-14">
-          <div className="mx-auto grid max-w-[1200px] gap-8 px-4 sm:px-6 lg:grid-cols-[1fr_340px]">
+        <section className="bg-transparent py-8 sm:py-14">
+          <div className="mx-auto grid max-w-[1200px] gap-8 px-3.5 sm:px-6 lg:grid-cols-[1fr_340px]">
             {/* Main Article: Beige VHS Cassette Slipcover */}
-            <article className="overflow-hidden rounded-2xl border-2 border-black bg-[#F2E8C9] text-[#1a0a3a] p-6 sm:p-12 shadow-[8px_8px_0px_#000]">
+            <article className="overflow-hidden rounded-2xl border-2 border-black bg-[#F2E8C9] text-[#1a0a3a] p-4 sm:p-8 md:p-12 shadow-[4px_4px_0px_#000] sm:shadow-[8px_8px_0px_#000]">
               {/* VHS Black Top Header Strip */}
-              <div className="-mx-6 -mt-6 sm:-mx-12 sm:-mt-12 mb-8 flex items-center justify-between border-b-2 border-black bg-black px-6 py-2.5 font-mono text-xs font-bold tracking-widest text-[#FFD24A]">
+              <div className="-mx-4 -mt-4 sm:-mx-8 sm:-mt-8 md:-mx-12 md:-mt-12 mb-6 sm:mb-8 flex items-center justify-between border-b-2 border-black bg-black px-4 sm:px-6 py-2.5 font-mono text-xs font-bold tracking-widest text-[#FFD24A]">
                 <span className="flex items-center gap-2">
                   <span>📼</span>
                   <span>VHS • SP • 120</span>

@@ -25,6 +25,9 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
 }
 
 body {
@@ -34,6 +37,15 @@ body {
   color: #ffffff;
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll; /* Prevents mobile Safari and Chrome scroll freezing and jitter */
+  }
 }
 
 ::selection {

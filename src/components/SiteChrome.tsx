@@ -119,13 +119,14 @@ export function Header() {
       </div>
 
       {/* Mobile quick links */}
-      <div className="flex items-center justify-center gap-4 overflow-x-auto border-t border-white/10 px-4 py-2 font-bold uppercase text-xs tracking-wider md:hidden">
-        <Link href="/" className="text-[#00D9FF]">Home</Link>
-        <Link href="/blog?cat=90s+TV+Sitcoms" className="text-[#F5E6C8]">Shows</Link>
-        <a href="https://www.facebook.com/share/19P1xEugxs/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-[#00D9FF] flex items-center gap-1">
+      <div className="flex items-center justify-start sm:justify-center gap-3 overflow-x-auto scrollbar-none border-t border-white/10 px-4 py-2 font-bold uppercase text-xs tracking-wider md:hidden">
+        <Link href="/" className="shrink-0 text-[#00D9FF]">Home</Link>
+        <Link href="/blog?cat=90s+TV+Sitcoms" className="shrink-0 text-[#F5E6C8]">Shows</Link>
+        <Link href="/about" className="shrink-0 text-[#F5E6C8]">About</Link>
+        <a href="https://www.facebook.com/share/19P1xEugxs/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="shrink-0 text-[#00D9FF] flex items-center gap-1">
           <Facebook className="h-3 w-3" /> 90210
         </a>
-        <a href="https://www.facebook.com/share/18sdgkeXCu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-[#FFD24A] flex items-center gap-1">
+        <a href="https://www.facebook.com/share/18sdgkeXCu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="shrink-0 text-[#FFD24A] flex items-center gap-1">
           <Facebook className="h-3 w-3" /> Full House
         </a>
       </div>

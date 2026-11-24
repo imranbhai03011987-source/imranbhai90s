@@ -5,6 +5,8 @@ import { fmtDate } from "../lib/dates";
 import { abs, JsonLd } from "../lib/seo";
 import { Facebook, Search } from "../components/icons";
 import { FB_PAGES } from "../lib/site";
+import { MobileNav } from "../components/MobileNav";
+import { NAV } from "../components/SiteChrome";
 
 export const revalidate = 60;
 
@@ -37,12 +39,12 @@ export const HOMEPAGE_FAQS = [
   },
 ];
 
-/* Nickelodeon-style green slime dripping from top corners */
+/* Nickelodeon-style green slime dripping from top corners (hidden on mobile to prevent blocking layout) */
 function CornerSlime() {
   return (
     <>
       {/* Top Left Slime */}
-      <div className="pointer-events-none absolute top-0 left-0 z-40 overflow-hidden leading-none select-none">
+      <div className="pointer-events-none absolute top-0 left-0 z-40 hidden sm:block overflow-hidden leading-none select-none">
         <svg width="140" height="110" viewBox="0 0 140 110" fill="#39FF14" className="slime-drop-shadow opacity-95">
           <path d="M0,0 L140,0 C125,25 110,32 98,32 C85,32 75,60 62,85 C54,102 42,102 38,78 C32,50 25,38 12,38 C5,38 0,28 0,0 Z" />
           <circle cx="52" cy="98" r="6" fill="#39FF14" />
@@ -51,7 +53,7 @@ function CornerSlime() {
         </svg>
       </div>
       {/* Top Right Slime */}
-      <div className="pointer-events-none absolute top-0 right-0 z-40 overflow-hidden leading-none select-none scale-x-[-1]">
+      <div className="pointer-events-none absolute top-0 right-0 z-40 hidden sm:block overflow-hidden leading-none select-none scale-x-[-1]">
         <svg width="140" height="110" viewBox="0 0 140 110" fill="#39FF14" className="slime-drop-shadow opacity-95">
           <path d="M0,0 L140,0 C125,25 110,32 98,32 C85,32 75,60 62,85 C54,102 42,102 38,78 C32,50 25,38 12,38 C5,38 0,28 0,0 Z" />
           <circle cx="52" cy="98" r="6" fill="#39FF14" />
@@ -70,7 +72,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
   const [featured, ...rest] = posts;
 
   return (
-    <div className="relative min-h-screen bg-[#0a0a23] bg-gradient-to-b from-[#1a0a3a] via-[#10082b] to-[#0a0a23] text-white selection:bg-[#FF1493] selection:text-white">
+    <div className="relative min-h-screen w-full max-w-full overflow-x-hidden bg-[#0a0a23] bg-gradient-to-b from-[#1a0a3a] via-[#10082b] to-[#0a0a23] text-white selection:bg-[#FF1493] selection:text-white">
       <CornerSlime />
 
       {/* JSON-LD Schema: ItemList + FAQPage for Google Rich Snippets */}
@@ -179,35 +181,38 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
 
             <Link
               href="/admin/login"
-              className="rounded-full border-2 border-[#FF1493] bg-[#0a0a23] px-4 py-1.5 font-bold uppercase text-xs tracking-widest text-[#FF1493] shadow-[0_0_15px_rgba(255,20,147,0.5)] hover:bg-[#FF1493] hover:text-white transition duration-200 hover:shadow-[0_0_25px_rgba(255,20,147,0.85)]"
+              className="rounded-full border-2 border-[#FF1493] bg-[#0a0a23] px-3.5 py-1.5 font-bold uppercase text-xs tracking-widest text-[#FF1493] shadow-[0_0_15px_rgba(255,20,147,0.5)] hover:bg-[#FF1493] hover:text-white transition duration-200 hover:shadow-[0_0_25px_rgba(255,20,147,0.85)]"
             >
               LOGIN
             </Link>
             <Link href="/blog" aria-label="Search stories" className="grid h-9 w-9 place-items-center text-[#00D9FF] hover:text-[#FF1493] transition">
               <Search className="h-5 w-5" />
             </Link>
+            <div className="md:hidden">
+              <MobileNav items={NAV} />
+            </div>
           </div>
         </div>
 
-        {/* Mobile quick-nav row */}
-        <div className="flex items-center justify-center gap-3 overflow-x-auto border-t border-white/10 px-4 py-2 font-bold uppercase text-xs tracking-wider md:hidden">
-          <Link href="/" className="text-[#00D9FF]">Home</Link>
-          <Link href="/blog?cat=90s+TV+Sitcoms" className="text-[#F5E6C8]">Shows</Link>
-          <a href="https://www.facebook.com/share/19P1xEugxs/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-[#00D9FF] flex items-center gap-1">
-            <Facebook className="h-3 w-3" /> 90210
+        {/* Mobile quick-nav row with smooth horizontal touch scrolling */}
+        <div className="flex items-center justify-start sm:justify-center gap-3 overflow-x-auto scrollbar-none border-t border-white/10 px-4 py-2 font-bold uppercase text-xs tracking-wider md:hidden">
+          <Link href="/" className="shrink-0 text-[#00D9FF]">Home</Link>
+          <Link href="/blog?cat=90s+TV+Sitcoms" className="shrink-0 text-[#F5E6C8]">Shows</Link>
+          <Link href="/about" className="shrink-0 text-[#F5E6C8]">About</Link>
+          <a href="https://www.facebook.com/share/19P1xEugxs/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="shrink-0 text-[#00D9FF] flex items-center gap-1">
+            <Facebook className="h-3 w-3" /> 90210 (8.2K)
           </a>
-          <a href="https://www.facebook.com/share/18sdgkeXCu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-[#FFD24A] flex items-center gap-1">
-            <Facebook className="h-3 w-3" /> Full House
+          <a href="https://www.facebook.com/share/18sdgkeXCu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="shrink-0 text-[#FFD24A] flex items-center gap-1">
+            <Facebook className="h-3 w-3" /> Full House (2.5K)
           </a>
-          <Link href="/about" className="text-[#F5E6C8]">About</Link>
         </div>
       </header>
 
       {/* ========================================================
           2. HERO SECTION (Bebas Heading, Beige Subtext, Stickers, CRT TV)
           ======================================================== */}
-      <section className="relative overflow-hidden px-4 pt-10 pb-16 sm:px-6 sm:pt-14 sm:pb-24 lg:px-12">
-        <div className="mx-auto grid max-w-[1366px] items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+      <section className="relative overflow-hidden px-4 pt-8 pb-16 sm:px-6 sm:pt-14 sm:pb-24 lg:px-12">
+        <div className="mx-auto grid max-w-[1366px] items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
           
           {/* Left Column: Heading + Subtext + Stickers */}
           <div>
@@ -217,18 +222,18 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
               <span>TGIF • VHS • SATURDAY MORNING</span>
             </div>
 
-            {/* Retro Display Brand Tagline */}
-            <div className="mt-4 font-[family-name:var(--font-bebas)] text-6xl leading-[0.95] tracking-wider text-[#FF1493] text-stroke-cyan-lg sm:text-7xl lg:text-8xl xl:text-9xl select-none" aria-hidden="true">
+            {/* Retro Display Brand Tagline - fully responsive on small mobile screens */}
+            <div className="mt-4 font-[family-name:var(--font-bebas)] text-5xl sm:text-7xl lg:text-8xl xl:text-9xl leading-[0.95] tracking-wider text-[#FF1493] text-stroke-cyan sm:text-stroke-cyan-lg select-none break-words" aria-hidden="true">
               I LOVE 90s TV
             </div>
 
             {/* Keyword-Rich H1 for Google SEO */}
-            <h1 className="mt-3 font-head text-2xl sm:text-3xl lg:text-4xl uppercase tracking-wide text-[#00D9FF] font-bold drop-shadow-[0_0_15px_rgba(0,217,255,0.4)]">
+            <h1 className="mt-3 font-head text-xl sm:text-3xl lg:text-4xl uppercase tracking-wide text-[#00D9FF] font-bold drop-shadow-[0_0_15px_rgba(0,217,255,0.4)]">
               90s TV Memories — Your Nostalgia Hub for Classic Shows, Cast Updates &amp; Behind-the-Scenes Stories
             </h1>
 
             {/* Subtext in beige #F5E6C8 */}
-            <p className="mt-5 max-w-xl font-serif text-lg leading-relaxed text-[#F5E6C8] sm:text-xl">
+            <p className="mt-4 max-w-xl font-serif text-base leading-relaxed text-[#F5E6C8] sm:text-xl">
               Saturday morning cartoons, TGIF sitcom perfection, VHS tapes from the corner rental store, and the legendary nostalgic stories that defined an entire childhood.
             </p>
 

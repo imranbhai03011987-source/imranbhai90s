@@ -72,16 +72,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
-        <Script
-          src="https://quge5.com/88/tag.min.js"
-          data-zone="307344"
-          strategy="afterInteractive"
-        />
-        <Script
-          src="https://nap5k.com/tag.min.js"
-          data-zone="12226907"
-          strategy="afterInteractive"
-        />
+        {/* Note: Popunder scripts (quge5 & nap5k) removed to fix mobile touch-hijacking/redirects and comply with Google AdSense policy */}
         <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-XQ5F2LYKCX"
