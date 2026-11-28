@@ -11,6 +11,11 @@ const config = {
       return [
         { source: "/about-us", destination: "/about", permanent: true },
         { source: "/contact-us", destination: "/contact", permanent: true },
+        { source: "/posts/privacy-policy", destination: "/privacy", permanent: true },
+        { source: "/privacy-policy", destination: "/privacy", permanent: true },
+        { source: "/posts/terms-of-service", destination: "/terms", permanent: true },
+        { source: "/terms-of-service", destination: "/terms", permanent: true },
+        { source: "/posts/disclaimer", destination: "/disclaimer", permanent: true },
         {
           source: "/posts/home-improvement-why-wilsons-face-was-never-shown-real-reason",
           destination: "/posts/why-wilsons-face-was-never-shown-home-improvement",

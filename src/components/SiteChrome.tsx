@@ -204,9 +204,9 @@ export function Footer() {
             </a>
             <Link href="/about" className="hover:text-[#00D9FF] transition">About</Link>
             <Link href="/contact" className="hover:text-[#00D9FF] transition">Contact</Link>
-            <Link href="/posts/privacy-policy" className="hover:text-[#00D9FF] transition">Privacy Policy</Link>
-            <Link href="/posts/terms-of-service" className="hover:text-[#00D9FF] transition">Terms of Service</Link>
-            <Link href="/posts/disclaimer" className="hover:text-[#00D9FF] transition">Disclaimer</Link>
+            <Link href="/privacy" className="hover:text-[#00D9FF] transition">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-[#00D9FF] transition">Terms of Service</Link>
+            <Link href="/disclaimer" className="hover:text-[#00D9FF] transition">Disclaimer</Link>
           </div>
         </div>
 
