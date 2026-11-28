@@ -102,5 +102,4 @@ export function MobileNav({ items }: { items: readonly (readonly [string, string
       )}
     </div>
   );
-  );
 }
