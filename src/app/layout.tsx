@@ -34,7 +34,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "/", languages: { "en-US": "/", "x-default": "/" } },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
   formatDetection: { telephone: false, email: false, address: false },
-  other: { "geo.region": "US", "geo.placename": "United States", "content-language": "en-US" },
+  other: {
+    "geo.region": "US",
+    "geo.placename": "United States",
+    "content-language": "en-US",
+    "google-adsense-account": "ca-pub-5861244705933198",
+  },
   openGraph: {
     type: "website",
     siteName: "90s TV Memories",
@@ -65,13 +70,14 @@ export const viewport: Viewport = { width: "device-width", initialScale: 1, them
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-US" className={`${bebas.variable} ${bungee.variable} ${poppins.variable} ${inter.variable} ${crimson.variable} ${titillium.variable} ${yellowtail.variable} ${condensed.variable}`}>
-      <body className="min-h-screen overflow-x-hidden" suppressHydrationWarning>
-        <Script
+      <head>
+        <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5861244705933198"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
         />
+      </head>
+      <body className="min-h-screen overflow-x-hidden" suppressHydrationWarning>
         {/* Note: Popunder scripts (quge5 & nap5k) removed to fix mobile touch-hijacking/redirects and comply with Google AdSense policy */}
         <Script
           async

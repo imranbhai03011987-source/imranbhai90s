@@ -28,8 +28,21 @@ def publish_next():
         return False
 
     next_article = None
+    now_utc = datetime.datetime.now(datetime.timezone.utc)
+
     for item in queue:
         if not item.get("published", False):
+            # Check if this article has a future scheduled timestamp
+            sched_str = item.get("scheduledFor")
+            if sched_str:
+                try:
+                    sched_dt = datetime.datetime.fromisoformat(sched_str.replace('Z', '+00:00'))
+                    if now_utc < sched_dt:
+                        print(f"[BOT] Next pending article [{item['id']}] '{item['title']}' is scheduled for {sched_str}.")
+                        print(f"[BOT] Current time is {now_utc.isoformat()}. Skipping publication until scheduled time.")
+                        return False
+                except Exception as e:
+                    print(f"[BOT] Warning: Could not parse scheduledFor '{sched_str}': {e}")
             next_article = item
             break
 

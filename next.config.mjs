@@ -51,7 +51,7 @@ const config = {
     async rewrites() {
       return [
         {
-          source: "/:slug(full-house-cast-then-and-now|saved-by-the-bell-cast-then-and-now|family-matters-cast-then-and-now|boy-meets-world-cast-then-and-now|fresh-prince-cast-then-and-now|friends-cast-then-and-now|top-20-90s-sitcoms|15-forgotten-90s-tv-shows|best-90s-cartoon-themes|why-90s-tv-was-better)",
+          source: "/:slug(full-house-cast-then-and-now|saved-by-the-bell-cast-then-and-now|family-matters-cast-then-and-now|boy-meets-world-cast-then-and-now|fresh-prince-cast-then-and-now|friends-cast-then-and-now|top-20-90s-sitcoms|15-forgotten-90s-tv-shows|best-90s-cartoon-themes|why-90s-tv-was-better|15-iconic-90s-cartoons-childhood|10-forgotten-90s-sitcoms-reboot|90s-teen-drama-love-triangles|30-mind-blowing-90s-tv-behind-the-scenes-secrets)",
           destination: "/posts/:slug",
         },
       ];
